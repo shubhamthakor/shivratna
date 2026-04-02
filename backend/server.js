@@ -8,10 +8,32 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
-// ✅ SIMPLE CORS (FINAL)
+// ✅ ROBUST CORS CONFIGURATION
+const allowedOrigins = [
+  'https://shivratna.vercel.app',
+  'https://shivratnaweb.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:5173' // If using Vite
+];
+
 app.use(cors({
-  origin: true,
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const isVercelPreview = origin.endsWith('.vercel.app');
+    const isAllowedMain = allowedOrigins.indexOf(origin) !== -1;
+
+    if (isAllowedMain || isVercelPreview) {
+      callback(null, true);
+    } else {
+      console.log("❌ CORS BLOCKED for origin:", origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json({ limit: '50mb' }));
