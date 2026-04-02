@@ -16,35 +16,10 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    console.log("Incoming origin:", origin);
-
-    if (!origin) return callback(null, true);
-
-    // normalize
-    const normalizedOrigin = origin.replace(/\/$/, '');
-
-    // allow exact matches
-    if (allowedOrigins.includes(normalizedOrigin)) {
-      return callback(null, true);
-    }
-
-    // ✅ allow ALL vercel domains safely
-    try {
-      const hostname = new URL(origin).hostname;
-
-      if (hostname.endsWith('.vercel.app')) {
-        return callback(null, true);
-      }
-    } catch (err) {
-      console.log("URL parse error:", err);
-    }
-
-    console.log("❌ CORS BLOCKED:", normalizedOrigin);
-    return callback(new Error("CORS not allowed"));
-  },
+  origin: true,   // allow all origins (safe for your case)
   credentials: true
 }));
+
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
