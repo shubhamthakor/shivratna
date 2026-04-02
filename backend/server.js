@@ -21,17 +21,26 @@ app.use(cors({
 
     if (!origin) return callback(null, true);
 
-    // allow main domains
-    if (allowedOrigins.includes(origin)) {
+    // normalize
+    const normalizedOrigin = origin.replace(/\/$/, '');
+
+    // allow exact matches
+    if (allowedOrigins.includes(normalizedOrigin)) {
       return callback(null, true);
     }
 
-    // ✅ allow all vercel preview domains
-    if (origin.includes('.vercel.app')) {
-      return callback(null, true);
+    // ✅ allow ALL vercel domains safely
+    try {
+      const hostname = new URL(origin).hostname;
+
+      if (hostname.endsWith('.vercel.app')) {
+        return callback(null, true);
+      }
+    } catch (err) {
+      console.log("URL parse error:", err);
     }
 
-    console.log("❌ CORS BLOCKED:", origin);
+    console.log("❌ CORS BLOCKED:", normalizedOrigin);
     return callback(new Error("CORS not allowed"));
   },
   credentials: true
