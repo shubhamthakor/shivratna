@@ -212,15 +212,48 @@ export function Footer() {
             </div>
             <p style={{ fontSize:13, lineHeight:1.9, color:'#64748b', marginBottom:16 }}>Gujarat's most trusted source for certified natural gemstones. Founded by Hemal Thakor with 15+ years of expertise.</p>
             <div style={{ display:'flex', gap:8 }}>
-              {['📘','📸','💬','📧'].map(icon => <a key={icon} href="#" style={{ width:34, height:34, borderRadius:9, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.08)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, textDecoration:'none' }}>{icon}</a>)}
+              {/* Instagram */}
+              <a href="https://www.instagram.com/mr__shubham__007_/" target="_blank" rel="noreferrer"
+                style={{ width:34, height:34, borderRadius:9, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.08)', display:'flex', alignItems:'center', justifyContent:'center', textDecoration:'none', transition:'all .2s' }}
+                onMouseEnter={e=>{e.currentTarget.style.background='rgba(225,48,108,0.2)';e.currentTarget.style.borderColor='rgba(225,48,108,0.4)';}}
+                onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,0.06)';e.currentTarget.style.borderColor='rgba(255,255,255,0.08)';}}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              {/* Facebook */}
+              <a href="https://www.facebook.com/share/1JdxrCzdRj/" target="_blank" rel="noreferrer"
+                style={{ width:34, height:34, borderRadius:9, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.08)', display:'flex', alignItems:'center', justifyContent:'center', textDecoration:'none', transition:'all .2s' }}
+                onMouseEnter={e=>{e.currentTarget.style.background='rgba(24,119,242,0.2)';e.currentTarget.style.borderColor='rgba(24,119,242,0.4)';}}
+                onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,0.06)';e.currentTarget.style.borderColor='rgba(255,255,255,0.08)';}}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
             </div>
           </div>
           {!isMobile && (
             <div>
               <h4 style={{ fontSize:11, fontWeight:600, color:'#fff', letterSpacing:'.5px', marginBottom:16, textTransform:'uppercase' }}>Gemstones</h4>
               <ul style={{ listStyle:'none' }}>
-                {['Ruby / Manik','Blue Sapphire / Neelam','Yellow Sapphire / Pukhraj','Emerald / Panna','Red Coral / Moonga','Tanzanite','Aquamarine','Amethyst'].map(item => (
-                  <li key={item} style={{ marginBottom:8 }}><a href="#" style={{ fontSize:13, color:'#64748b', textDecoration:'none' }}>{item}</a></li>
+                {[
+                  ['Ruby / Manik','collection'],
+                  ['Blue Sapphire / Neelam','collection'],
+                  ['Yellow Sapphire / Pukhraj','collection'],
+                  ['Emerald / Panna','collection'],
+                  ['Red Coral / Moonga','collection'],
+                  ['Tanzanite','collection'],
+                  ['Aquamarine','collection'],
+                  ['Amethyst','collection'],
+                ].map(([item, section]) => (
+                  <li key={item} style={{ marginBottom:8 }}>
+                    <a href={`#${section}`} onClick={e=>{e.preventDefault();document.getElementById(section)?.scrollIntoView({behavior:'smooth'});}}
+                      style={{ fontSize:13, color:'#64748b', textDecoration:'none', transition:'color .2s', cursor:'pointer' }}
+                      onMouseEnter={e=>e.target.style.color='#bae6fd'}
+                      onMouseLeave={e=>e.target.style.color='#64748b'}>
+                      {item}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -229,8 +262,22 @@ export function Footer() {
             <div>
               <h4 style={{ fontSize:11, fontWeight:600, color:'#fff', letterSpacing:'.5px', marginBottom:16, textTransform:'uppercase' }}>Quick Links</h4>
               <ul style={{ listStyle:'none' }}>
-                {['About Hemal Thakor','Gem Collection','Free Consultation','Vedic Gemstone Guide','Shipping Policy','Privacy Policy'].map(item => (
-                  <li key={item} style={{ marginBottom:8 }}><a href="#" style={{ fontSize:13, color:'#64748b', textDecoration:'none' }}>{item}</a></li>
+                {[
+                  ['About Hemal Thakor','about'],
+                  ['Gem Collection','collection'],
+                  ['Free Consultation','contact'],
+                  ['Vedic Gemstone Guide','why'],
+                  ['Shipping Policy','contact'],
+                  ['Privacy Policy','contact'],
+                ].map(([item, section]) => (
+                  <li key={item} style={{ marginBottom:8 }}>
+                    <a href={`#${section}`} onClick={e=>{e.preventDefault();document.getElementById(section)?.scrollIntoView({behavior:'smooth'});}}
+                      style={{ fontSize:13, color:'#64748b', textDecoration:'none', transition:'color .2s', cursor:'pointer' }}
+                      onMouseEnter={e=>e.target.style.color='#bae6fd'}
+                      onMouseLeave={e=>e.target.style.color='#64748b'}>
+                      {item}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
