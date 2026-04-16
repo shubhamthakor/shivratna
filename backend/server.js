@@ -13,7 +13,8 @@ const allowedOrigins = [
   'https://shivratna.vercel.app',
   'https://shivratnaweb.vercel.app',
   'http://localhost:3000',
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'http://localhost:5174'
 ];
 
 app.use(cors({
